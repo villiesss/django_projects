@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% block content %}
+<form method="get" action="{% url 'main:search' %}">
+    <input type="text" name="q" value="">Search</input>
+    <input type="submit" value="Search">
+</form>
+        <table id='posts' border=2>
+            <th>ABTOP</th>
+            <th>Заголовок</th>
+            <th>Текст поста</th>
+            <th>Дата создания</th>
+        {% for post in posts %}
+        <tr>
+            <td align="center"><a href="{% url 'users:user_info' pk=post.author.id %}">{{post.author}}</a></td>
+            <td align="center"><a href="{% url 'main:post_detail' pk=post.id %}">{{post.title}}<br><a></td>
+            <td align="center">{{post.text}}<br></td>
+            <td align="center">{{post.created_date}}<br></td>
+        </tr>
+        {% endfor %}
+{% endblock content %}
